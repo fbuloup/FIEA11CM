@@ -1,0 +1,241 @@
+\documentclass{beamer}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pst-sigsys} 
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{pstricks-add} 
+\usepackage{ragged2e}
+\usepackage{graphicx}
+\usepackage{ulem}
+\usepackage{fontawesome}
+\setbeamertemplate{navigation symbols}{}  
+ 
+\usetheme{Darmstadt}
+\setbeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
+\title{M1 IEAP - BTI/FH/IEMH\\pFIEA02CM : Analyse et Traitement du Signal}
+\author{Flavy ROSEREN\\Martin EGIZIANO\\Frank BULOUP}
+\institute{Aix Marseille Université\\Institut des Sciences du Mouvement}
+\date{}
+
+\setbeamertemplate{footline} 
+{  
+	\begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+      {\usebeamerfont{title in head/foot}\insertshorttitle} \hfill    
+      \insertframenumber / \inserttotalframenumber%
+    \end{beamercolorbox}%
+%     \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+%     \end{beamercolorbox} 
+}
+
+\newcounter{exampleBlockCounter}
+\setcounter{exampleBlockCounter}{1}
+
+\begin{document} 
+ 
+\begin{frame}[plain] 
+	\titlepage 
+	\center{\includegraphics[scale=0.75]{images/by-nc-sa.eps}}
+	\vspace{1cm}
+	\includegraphics[scale=0.6]{images/LogoAMU.png}\hspace*{2cm}
+	\includegraphics[scale=0.2]{images/LogoCNRS.eps}\hspace*{2cm}
+	\includegraphics[scale=0.1]{images/LogoISM.eps}
+\end{frame}
+
+\begin{frame}{Première Partie}
+	\tableofcontents
+\end{frame}
+
+\section{Signal Discret - Aspect temporel}
+\subsection{Discrétisation : lien avec l'échantillonnage}
+\begin{frame}
+\begin{block}{Discrétisation}
+\justifying
+Opération consistant à remplacer des relations portant sur des fonctions
+continues par un nombre fini de relations algébriques 
+portant sur les valeurs prises par ces fonctions en un nombre fini de points
+ de leur ensemble de définition (Def. Larousse).
+ \smallbreak
+ \center
+ \textcolor{red}{Lien évident avec l'échantillonnage, l'acquisition de données}
+\end{block}
+\pause
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Exemple}
+\justifying
+Soit la fonction $f(t) = Acos(\omega t)$. Prendre les valeurs de $f(t)$ tous les
+$nT_{e}$ revient à discrétiser f(t). On parle alors de fonction discrète ou
+plutôt de signal discret et on note $f(n) = Acos(\omega nT_{e})$
+\end{exampleblock}
+\end{frame}
+\stepcounter{exampleBlockCounter}
+\begin{frame}
+	\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Application sous Python}
+		\begin{enumerate}\justifying
+			  \item Etudier la fonction \textit{wavread} dans l'aide Python
+			  \item Charger le signal contenu dans le fichier \textit{mi2\_bute\_ros.wav} ainsi que la fréquence d'échantillonnage d'enregistrement $F_{s}$
+			  \item Ecouter le fichier (fonction \textit{soundsc}).  Que se passe-t-il si on multiplie ou divise $F_{s}$ par 2 ?
+			  \item Créer un vecteur temporel correspondant au signal. Tracer le signal en fonction du temps.
+			  \item En utilisant les outils de zoom et le curseur, estimer la fréquence fondamentale de la note jouée.
+			  \item Sur un second graphe (fonction \textit{subplot}) tracer le signal pour une fréquence d'échantillonnage deux fois plus élevée. Vérifier l'observation faite à la question 3.   
+		\end{enumerate}
+	\end{exampleblock}
+\end{frame}
+\stepcounter{exampleBlockCounter}
+
+\subsection[Signaux élémentaires]{Quelques signaux discrets élémentaires}
+\begin{frame}
+\begin{block}{L'impulsion unitaire}
+\begin{columns}[t]
+	\begin{column}{5cm}
+	\smallbreak 
+		\[
+			\delta (n) = 
+			\begin{cases}
+			1 & \text{si } n = 0 \\
+			0 & \text{ailleurs}
+			\end{cases}
+		\]
+	\end{column}
+	\begin{column}{5cm}
+		\begin{figure}
+			\begin{pspicture}[showgrid=false](-2,-.5)(3,1.5)
+				\psaxeslabels{->}(0,0)(-2,0)(3,1.5){$n$}{$\delta (n)$}
+				\psstem[stemhead=o, stemtag](-2,1){0, 0, 1 ,0 , 0}  
+			\end{pspicture}
+		\end{figure}
+	\end{column}
+\end{columns}
+\end{block}
+\pause
+\begin{block}{L'échelon unitaire}
+\begin{columns}[t]
+	\begin{column}{5cm}
+	\smallbreak 
+		\[
+		u(n) =
+		\begin{cases}
+		1 & \text{si } n \geq 0 \\
+		0 & \text{ailleurs}
+		\end{cases}  
+		\]
+	\end{column}
+	\begin{column}{5cm}
+		\begin{figure}
+			\begin{pspicture}[showgrid=false](-2,-.5)(3,1.5)
+				\psaxeslabels{->}(0,0)(-2,0)(3,1.5){$n$}{$u(n)$}
+				\psstem[stemhead=o, stemtag](-2,1){0, 0, 1 , 1, 1}  
+			\end{pspicture}
+		\end{figure}
+	\end{column}
+\end{columns}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{La porte}
+\begin{columns}[t]
+	\begin{column}{5cm}
+	\smallbreak 
+		\[
+		\Pi_{N}(n)=
+		\begin{cases}
+		1 & \text{si } 0 \leq n \leq N-1 \\
+		0 & \text{ailleurs}
+		\end{cases}
+		\]
+	\end{column}
+	\begin{column}{5cm}
+		\begin{figure}
+			\begin{pspicture}[showgrid=false](-2,-.5)(3,1.5)
+				\psaxeslabels{->}(0,0)(-2,0)(3,1.5){$n$}{$\Pi_{2}(n)$}
+				\psstem[stemhead=o, stemtag](-2,1){0, 0, 1 , 1, 0}  
+			\end{pspicture}
+		\end{figure}
+	\end{column}
+\end{columns}
+\end{block}
+\pause
+\begin{alertblock}{Remarques}
+\[
+u(n) = \sum_{k=0}^{+\infty} \delta (n-k)
+\] 
+\[
+\Pi_{N}(n) = \sum_{k=0}^{+\infty} \delta (n-k) - \sum_{l=N}^{+\infty}
+\delta(n-l)
+\] 
+\end{alertblock} 
+\end{frame}
+
+\begin{frame}
+\begin{block}{Les fonctions cosinus et sinus discrètes}
+	\[
+		s_1(n) = cos(2\pi f \,  nT_e)\text{ et }s_2(n) = sin(2\pi f \, nT_e)
+	\]
+\end{block}
+
+\begin{alertblock}{Remarque}
+\justifying
+Les variables $n$, $k$ ou $l$ utilisées précédement sont implicitement
+équivalentes à $nT_e$, $kT_e$ ou $lT_e$, $T_e$ étant la période d'échantillonnage 
+\end{alertblock} 
+\pause
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Signaux élémentaires}\justifying 
+\itemize
+	\item Tracer les signaux élémentaires sous Python %\sout{(voir éventuellement les
+	%fonctions \textbf{square}, \textbf{sawtooth} et \textbf{chirp})}
+	%\item Lire les fichiers de données MOUT104
+\end{exampleblock}
+\end{frame}  
+\stepcounter{exampleBlockCounter}
+\begin{frame} 
+	\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Transition vers l'aspect fréquentiel}
+	\justifying Cet exercice propose de mettre en oeuvre la synthèse d'un signal
+	par composition de sinusoïde
+		\begin{enumerate}
+		 	\item Créer un script nommé \textit{Exercice6.m} contenant "clear all;
+		 	close all; clc;" comme premières commandes
+			\item Créer un vecteur temporel dans l'intervalle $[0;2]$ avec un pas de
+			  $0.001s$ 
+			\item Tracer le signal discret $s(n)$ construit sur la composition suivante :
+			\[ 
+			s(t) = \frac{4}{\pi}[sin(2\pi t) + \frac{1}{3}sin(2\pi 3 t) +
+			\frac{1}{5}sin(2\pi 5 t)]
+			\] 
+			\item Modifier le script pour sommer cinquante termes de la forme :
+			\[
+			\frac{4}{(2k+1)\pi}sin[2\pi (2k+1)t]\text{ $k$ allant de $0$ à  $49$}
+			\] 
+		\end{enumerate}
+	\end{exampleblock}
+\end{frame}
+\stepcounter{exampleBlockCounter}
+\section{Signal discret - Aspect fréquentiel}
+\subsection{Série de Fourier} 
+\begin{frame}
+\begin{block}{Généralisation}
+\justifying L'exemple de l'exercice précédent peut se généraliser  :
+\textcolor{red}{presque tout \textbf{signal continu} périodique peut être
+synthétisé par sommation de sinus et/ou de cosinus}. C'est ce que l'on appelle la \textcolor{red}{Série de Fourier}. Un signal $s(t)$ de
+période $T_0 = \frac{1}{f_0}$ peut alors s'écrire de la façon suivante :
+\begin{align*}
+s(t) = S(0) + \sum_{k=1}^{+\infty} 2\rho (k) cos[2\pi kf_0t+\phi (k)]
+\end{align*}
+\end{block}
+\pause
+\begin{alertblock}{Remarques}
+	\itemize
+	\item $\rho(k)$ et $\phi(k)$ sont respectivement des amplitudes et des phases
+	\pause
+	\item $S(0)$ est la valeur moyenne, c'est toujours un réel pur
+	\pause
+	\item $f_0$ est la fréquence fondamentale 
+	\pause
+	\item Les fréquences des cosinus sont des multiples entiers de $f_0$. Ce sont
+	les harmoniques.
+\end{alertblock}
+\end{frame}
+
+\end{document}

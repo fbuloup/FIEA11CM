@@ -1,0 +1,265 @@
+\documentclass{beamer}
+\usepackage{etex}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pst-sigsys} 
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{pstricks-add} 
+\usepackage{ragged2e}
+\usepackage{graphicx}
+\usepackage{ulem}
+\usepackage{fontawesome}
+\setbeamertemplate{navigation symbols}{}  
+ 
+\usetheme{Darmstadt}
+\setbeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
+\title{M1 IEAP - BTI/FH/IEMH\\pFIEA02CM : Analyse et Traitement du Signal}
+\author{Flavy ROSEREN\\Martin EGIZIANO\\Frank BULOUP}
+\institute{Aix Marseille Université\\Institut des Sciences du Mouvement}
+\date{}
+
+\setbeamertemplate{footline} 
+{  
+	\begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+      {\usebeamerfont{title in head/foot}\insertshorttitle} \hfill    
+      \insertframenumber / \inserttotalframenumber%
+    \end{beamercolorbox}%
+%     \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+%     \end{beamercolorbox} 
+}
+
+\newcounter{exampleBlockCounter}
+\setcounter{exampleBlockCounter}{1}
+
+\begin{document} 
+ 
+\begin{frame}[plain] 
+	\titlepage 
+	\center{\includegraphics[scale=0.75]{images/by-nc-sa.eps}}
+	\vspace{1cm}
+	\includegraphics[scale=0.6]{images/LogoAMU.png}\hspace*{2cm}
+	\includegraphics[scale=0.2]{images/LogoCNRS.eps}\hspace*{2cm}
+	\includegraphics[scale=0.1]{images/LogoISM.eps}
+\end{frame}
+
+\begin{frame}{Première Partie}
+	\tableofcontents 
+\end{frame}
+
+\section{Signal discret - Aspect fréquentiel}
+\subsection{Série de Fourier} 
+\begin{frame}
+\begin{block}{Généralisation}
+\justifying L'exemple de l'exercice précédent peut se généraliser  :
+\textcolor{red}{presque tout \textbf{signal continu} périodique peut être
+synthétisé par sommation de sinus et/ou de cosinus}. C'est ce que l'on appelle la \textcolor{red}{Série de Fourier}. Un signal $s(t)$ de
+période $T_0 = \frac{1}{f_0}$ peut alors s'écrire de la façon suivante :
+\begin{align*}
+s(t) = S(0) + \sum_{k=1}^{+\infty} 2\rho (k) cos[2\pi kf_0t+\phi (k)]
+\end{align*}
+\end{block}
+\pause
+\begin{alertblock}{Remarques}
+	\itemize
+	\item $\rho(k)$ et $\phi(k)$ sont respectivement des amplitudes et des phases
+	\pause
+	\item $S(0)$ est la valeur moyenne, c'est toujours un réel pur
+	\pause
+	\item $f_0$ est la fréquence fondamentale 
+	\pause
+	\item Les fréquences des cosinus sont des multiples entiers de $f_0$. Ce sont
+	les harmoniques.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\begin{alertblock}{Mais comment obtenir $\rho(k)$ et $\phi(k)$ ?}
+\justifying Par le calcul du nombre complexe $S(k)$ suivant :
+\[
+S(k) = \frac{1}{T_0}\int_{-T_{0}/2}^{T_{0}/2}s(t)e^{-2i\pi k f_{0}t} dt
+\Rightarrow
+\begin{cases}
+\rho(k) = \lvert S(k) \rvert\\
+\phi(k) = Arg[S(k)]
+\end{cases}
+\]
+% \justifying Qui donnera $\rho(k) = \lvert S(k) \rvert$ et $\phi(k) = Arg[S(k)]$
+\end{alertblock}
+\pause
+\begin{block}{Série de Fourier du signal carré}
+\justifying Le calcul de $S(k)$ sur le signal carré précédent nous donnerait :
+\[
+S(k) =
+\begin{cases}
+ \frac{2}{k\pi}e^{-i\frac{\pi}{2}}\text{ pour toutes les valeurs de
+}k\text{ impaires}\\
+0\text{ pour toutes les valeurs de }k\text{ paires}
+\end{cases}
+\]
+\end{block}
+\end{frame} 
+
+\begin{frame}
+\begin{alertblock}{Remarques}
+\itemize \justifying
+\item La synthèse d'un signal périodique par une série de Fourier
+nécessite un nombre infini d'harmoniques, c.a.d. que
+le signal est composé de bien plus hautes fréquences que la
+fondamentale.
+\pause
+\item En pratique on se limite a un nombre fini de termes. Le signal
+obtenu est alors une approximation du signal périodique initial.
+\pause
+\item Si le signal initial présente des points de discontinuités, un phénomène
+oscillatoire autour de ces points vient compromettre la convergence : en ces
+points, la série de Fourier ne converge pas vers le signal original. C'est ce
+que l'on nomme \textbf{phénomène de Gibbs}.
+\end{alertblock}
+\end{frame}
+
+\subsection{Représentation fréquentielle des signaux}
+\begin{frame}
+\begin{block}{Représentation fréquentielle et spectres monolatéraux}
+\justifying
+Le développement d'un signal en série de Fourier donne donc une information
+sur sa composition en fréquence : le signal est une somme de cosinusoïdes dont
+les amplitudes, les phases et les fréquences sont bien définies.
+Il est donc possible de le caractériser par un ensemble de triplets $[2\rho(k),
+\phi(k), kf_0]$ lorsque $k$ est différent de zéro et par le triplet $[\rho(0),
+\phi(0), 0]$ pour la fréquence nulle, $\phi(0)$ valant $0$ ou $\pi$.
+\end{block}
+\pause
+\begin{columns}[t]
+	\begin{column}{4cm}
+		\begin{figure}
+			\begin{pspicture}[showgrid=false](0,-.5)(4,3)
+				\psaxeslabels{->}(0,0)(0,0)(4,3){$f$}{$Amplitude$}
+				\psstem[style=Stem]{2,.5,1,0}
+				\rput(0,-.250){$0$}
+				\rput(1,-.250){$f_0$}
+				\rput(2,-.250){$2f_0$}
+				\rput(3,-.250){$3f_0$}
+				\rput(.450,2.25){$\rho(0)$}
+				\rput(1,.850){$2\rho(1)$}
+				\rput(2,1.35){$2\rho(2)$}
+				\rput(3,0.35){$2\rho(3)$}
+				\pause
+				\rput*{45}(2,1.75){\textbf{\textcolor{red}{Spectre d'amplitude}}}
+			\end{pspicture}
+		\end{figure}
+	\end{column}
+				\pause
+	\begin{column}{4cm}
+		\begin{figure}
+			\begin{pspicture}[showgrid=false](0,-2.5)(4,1)
+				\psaxeslabels{->}(0,0)(0,-2)(4,1){$f$}{$Phase$}
+				\psstem[style=Stem]{0,-1.5,-.25,0}
+				\rput(-.250,.250){$0$}
+				\rput(1,.250){$f_0$}
+				\rput(2,.250){$2f_0$}
+				\rput(3,.250){$3f_0$}
+				\rput(.40,-.25){$\phi(0)$}
+				\rput(1,-1.850){$\phi(1)$}
+				\rput(2,-.65){$\phi(2)$}
+				\rput(3,-0.35){$\phi(3)$}
+				\pause
+				\rput*{45}(2,-.75){\textbf{\textcolor{red}{Spectre de phase}}}
+			\end{pspicture}
+		\end{figure}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Représentation spectrale monolatérale}
+Représenter les spectres monolatéraux des signaux suivants :
+\begin{itemize}
+  \item $s_1(t) = 3$
+  \item $s_2(t) = 6sin(2\pi t)$
+  \item $s_3(t) = 1 + 2cos(10\pi t) + 4cos(20\pi t)$
+  \item $s_4(t) = cos(100\pi t) + cos^2(100\pi t)$
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+\stepcounter{exampleBlockCounter}
+\begin{frame}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Représentation spectrale monolatérale}
+\itemize\justifying
+\item Représenter les spectres monolatéraux d'amplitude et de phase du signal carré
+\item Écrire le signal temporel associé aux spectres monolatéraux :
+\end{exampleblock}
+\begin{columns}[t]
+	\begin{column}{4cm}
+		\begin{figure}
+			\begin{pspicture}[showgrid=false](0,-.5)(4,3)
+				\psaxeslabels{->}(0,0)(0,0)(4,3){$f$}{$Amplitude$}
+				\psstem[style=Stem]{2,.5,1,0}
+				\rput(0,-.250){$0$}
+				\rput(1,-.250){$f_0$}
+				\rput(2,-.250){$2f_0$}
+				\rput(3,-.250){$3f_0$}
+				\rput(.450,2.25){$4$}
+				\rput(1,.850){$1$}
+				\rput(2,1.35){$2$}
+				\rput(3,0.35){$ $}
+			\end{pspicture}
+		\end{figure}
+	\end{column}
+	\begin{column}{4cm}
+		\begin{figure}
+			\begin{pspicture}[showgrid=false](0,-2.5)(4,1)
+				\psaxeslabels{->}(0,0)(0,-2)(4,1){$f$}{$Phase$}
+				\psstem[style=Stem]{0,-1.5,-.25,0}
+				\rput(-.250,.250){$0$}
+				\rput(1,.250){$f_0$}
+				\rput(2,.250){$2f_0$}
+				\rput(3,.250){$3f_0$}
+				\rput(.40,-.25){$ $}
+				\rput(1,-1.850){$-3$}
+				\rput(2,-.65){$-0.5$}
+				\rput(3,-0.35){$ $}
+			\end{pspicture}
+		\end{figure}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\stepcounter{exampleBlockCounter}
+
+\begin{frame}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Série de Fourier}
+\justifying Retrouver le résultat de l'exercice précédent par le calcul de
+$S(k)$ sur le signal suivant :
+\begin{figure}
+% 	\psset{xunit=1cm}
+% 	\psset{yunit=1cm}
+	\begin{pspicture}[showgrid=false](-5,-1)(5,1.25)
+		\psaxeslabels[Dx=1]{->}(0,0)(-5,-1)(5,1.25){$t$}{$s(t)$}
+		\psline(0,0.5)(1,0.5)
+		\psline(1,-0.5)(2,-0.5)
+		\psline(2,0.5)(3,0.5)
+		\psline(3,-0.5)(4,-0.5)
+		\psline(-1,-0.5)(0,-0.5)
+		\psline(-2,0.5)(-1,0.5)
+		\psline(-3,-0.5)(-2,-0.5)
+		\psline(-4,0.5)(-3,0.5)
+		\psline(1,-0.5)(1,0.5)
+		\psline(2,-0.5)(2,0.5)
+		\psline(3,-0.5)(3,0.5)
+		\psline(-1,-0.5)(-1,0.5)
+		\psline(-2,-0.5)(-2,0.5)
+		\psline(-3,-0.5)(-3,0.5)
+		\rput(4.5,0.25){\Large\ldots}
+		\rput(-4.5,0.25){\Large\ldots}
+		\rput(2.25,-0.25){$T_0$}
+		\rput(-.25,0.5){$1$}
+		\rput(0.25,-0.5){$-1$}
+	\end{pspicture}
+\end{figure}
+\end{exampleblock}
+\end{frame}
+
+\end{document}
