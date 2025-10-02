@@ -8,4 +8,5 @@ Ce dépôt contient l'ensemble des fichiers du cours :
 * <a id="raw-url" href="https://raw.githubusercontent.com/fbuloup/pFIEA02CM/main/sequence_5.pdf">Séquence 5</a>
 * <a id="raw-url" href="https://raw.githubusercontent.com/fbuloup/pFIEA02CM/main/sequence_6.pdf">Séquence 6</a>
 ## Corrections des TDs : [ici](https://github.com/fbuloup/pFIEA02CM/tree/main/Corrections%20TDs)
-## Exemple de sujet : [ici](https://github.com/fbuloup/pFIEA02CM/tree/main/Corrections%20TDs)
+## Exemple de sujet : <a id="raw-url" href="https://raw.githubusercontent.com/fbuloup/pFIEA02CM/main/SUJET_0/FIEA02CM_CF_2022.pdf">Sujet 0</a>
+[ici](https://github.com/fbuloup/pFIEA02CM/tree/main/Corrections%20TDs)
