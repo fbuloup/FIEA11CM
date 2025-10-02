@@ -3,3 +3,6 @@ Ce dépôt contient l'ensemble des fichiers du cours :
 - Présentations
 - Corrections des TDs
 - Exemple de sujet
+
+
+<a id="raw-url" href="https://raw.githubusercontent.com/fbuloup/pFIEA02CM/main/sequence_1.pdf">Outline</a>
