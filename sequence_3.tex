@@ -15,7 +15,7 @@
  
 \usetheme{Darmstadt}
 \setbeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
-\title{M1 IEAP - BTI/FH/IEMH\\FIEA11CM : Analyse et Traitement du Signal}
+\title{M1 IEAP - BTI/FH/IEMH -\\FIEA11CM : Analyse et Traitement du Signal}
 \author{Flavy ROSEREN\\Martin EGIZIANO\\Frank BULOUP}
 \institute{Aix Marseille Université\\Institut des Sciences du Mouvement}
 \date{}
@@ -45,11 +45,7 @@
 	\includegraphics[scale=0.1]{images/LogoISM.eps}
 \end{frame}
 
-\begin{frame}{Première Partie}
-	\tableofcontents
-\end{frame}
-
-\section{Signal Discret - Aspect temporel}
+\section{Signaux continu et discret - Aspect temporel}
 \subsection{Discrétisation : lien avec l'échantillonnage}
 \begin{frame}
 \begin{block}{Discrétisation}
@@ -74,9 +70,9 @@ plutôt de signal discret et on note $f(n) = Acos(\omega nT_{e})$
 \begin{frame}
 	\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Application sous Python}
 		\begin{enumerate}\justifying
-			  \item Etudier la fonction \textit{wavread} dans l'aide Python
-			  \item Charger le signal contenu dans le fichier \textit{mi2\_bute\_ros.wav} ainsi que la fréquence d'échantillonnage d'enregistrement $F_{s}$
-			  \item Ecouter le fichier (fonction \textit{soundsc}).  Que se passe-t-il si on multiplie ou divise $F_{s}$ par 2 ?
+			  \item Etudier la fonction \textit{wavread} dans l'aide Python en utilisant la commande help(scipy.io.wavefile)
+			  \item Charger le signal et la fréquence d'échantillonnage contenus dans le fichier \textit{mi2\_bute\_ros.wav}
+			  \item Ecouter le fichier (fonction \textit{play}) du module sounddevice.  Que se passe-t-il si on multiplie ou divise $F_{s}$ par 2 ?
 			  \item Créer un vecteur temporel correspondant au signal. Tracer le signal en fonction du temps.
 			  \item En utilisant les outils de zoom et le curseur, estimer la fréquence fondamentale de la note jouée.
 			  \item Sur un second graphe (fonction \textit{subplot}) tracer le signal pour une fréquence d'échantillonnage deux fois plus élevée. Vérifier l'observation faite à la question 3.   
@@ -189,14 +185,15 @@ Les variables $n$, $k$ ou $l$ utilisées précédement sont implicitement
 	%\item Lire les fichiers de données MOUT104
 \end{exampleblock}
 \end{frame}  
+
+\section{Transition}
+\subsection{Transition vers l'aspect fréquentiel} 
 \stepcounter{exampleBlockCounter}
 \begin{frame} 
-	\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Transition vers l'aspect fréquentiel}
-	\justifying Cet exercice propose de mettre en oeuvre la synthèse d'un signal
-	par composition de sinusoïde
+	\begin{exampleblock}{Exercice \Roman{exampleBlockCounter}}
+	\centering Synthèse d'un signal par composition de sinusoïdes
 		\begin{enumerate}
-		 	\item Créer un script nommé \textit{Exercice6.m} contenant "clear all;
-		 	close all; clc;" comme premières commandes
+		 	\item Créer un script dont les premières commandes permettent de fermer toutes les fenêtres graphiques et d'effacer la mémoire des variables.
 			\item Créer un vecteur temporel dans l'intervalle $[0;2]$ avec un pas de
 			  $0.001s$ 
 			\item Tracer le signal discret $s(n)$ construit sur la composition suivante :
@@ -212,12 +209,12 @@ Les variables $n$, $k$ ou $l$ utilisées précédement sont implicitement
 	\end{exampleblock}
 \end{frame}
 \stepcounter{exampleBlockCounter}
-\section{Signal discret - Aspect fréquentiel}
+\section{Signaux continu et discret - Aspect fréquentiel}
 \subsection{Série de Fourier} 
 \begin{frame}
 \begin{block}{Généralisation}
-\justifying L'exemple de l'exercice précédent peut se généraliser  :
-\textcolor{red}{presque tout \textbf{signal continu} périodique peut être
+\justifying 
+\textcolor{red}{Presque tout \textbf{signal continu} périodique peut être
 synthétisé par sommation de sinus et/ou de cosinus}. C'est ce que l'on appelle la \textcolor{red}{Série de Fourier}. Un signal $s(t)$ de
 période $T_0 = \frac{1}{f_0}$ peut alors s'écrire de la façon suivante :
 \begin{align*}

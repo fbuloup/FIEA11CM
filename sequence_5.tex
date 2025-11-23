@@ -15,7 +15,7 @@
  
 \usetheme{Darmstadt}
 \setbeamertemplate{footline}{\insertframenumber/\inserttotalframenumber}
-\title{M1 IEAP - BTI/FH/IEMH\\FIEA11CM : Analyse et Traitement du Signal}
+\title{M1 IEAP - BTI/FH/IEMH -\\FIEA11CM : Analyse et Traitement du Signal}
 \author{Flavy ROSEREN\\Martin EGIZIANO\\Frank BULOUP}
 \institute{Aix Marseille Université\\Institut des Sciences du Mouvement}
 \date{}
@@ -45,12 +45,8 @@
 	\includegraphics[scale=0.1]{images/LogoISM.eps}
 \end{frame}
 
-\begin{frame}{Première Partie}
-	\tableofcontents
-\end{frame}
-
 \section{Signal discret - Aspect fréquentiel}
-\subsection{Représentation fréquentielle des signaux}
+\subsection{De la série de Fourier à la Transformée de Fourier Discrète}
 \begin{frame}
 \begin{exampleblock}{Mais dans la majorité des cas pratiques :}
 \itemize\justifying
@@ -74,7 +70,7 @@ TFD}}
 \end{alertblock}
 \end{frame}
 
-\subsection{Transformées de Fourier Discrète et Rapide (TFD, TFR)}
+
 \begin{frame}
 On obtient alors la Transformée de Fourier Discrète :
 \begin{align*}
@@ -117,26 +113,37 @@ S(k) = \sum_{n=0}^{N-1}s(n)e^{-2i\pi \frac{kn}{N}} \quad s(n) =
 \end{block}
 \end{frame}
 
+\subsection{Transformées de Fourier Discrète et Rapide : TFD et TFR (ou FFT)}
 \begin{frame}
-\begin{exampleblock}{Exercice FFT Python}
-Représenter les spectres des signaux suivants en utilisant les commandes $fft$ et $stem$ de Python :
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Spectres monolatéraux avec Python}
+Représenter les spectres monolatéraux des signaux suivants avec Python en utilisant la fonction fft du package numpy.fft :
 \begin{itemize}
   \item $s_1(t) = 3$
   \item $s_2(t) = 6sin(2\pi t)$
-  \item $s_3(t) = 1 + 2cos(10\pi t) + 4cos(20\pi t + \frac{\pi}{6})$
+  \item $s_3(t) = 1 + 2cos(10\pi t) + 4cos(20\pi t)$
   \item $s_4(t) = cos(100\pi t) + cos^2(100\pi t)$
 \end{itemize}
+Le but est bien sûr d'obtenir le même résultat que la séquence précédent. Il va falloir manipuler le résultat de la fonction fft sous python pour y parvenir ! 
 \end{exampleblock}
-\pause
-\begin{alertblock}{Remarque importante}
+\end{frame}
+
+\begin{frame}
+\begin{alertblock}{Remarques importantes}
+\begin{itemize}
+\item La FFT est un algorithme optimisé de la TFD
+\item Cet algorithme ne donne pas un résultat directement exploitable
+\item Il faut manipuler ce résultat pour retrouver les spectres monolatéraux que l'on avait obtenu
+\item Pour obtenir une compréhension globale, il faut aussi se pencher sur les parités des spectres d'un signal réel et introduire la notion de spectre bilatéral
+\end{itemize}
 \justifying
-La command $fft$ de Python donne un résultat qui fait intervenir le spectre bilatéral où les fréquences négatives doivent être prises en compte.
+
 \end{alertblock}
 \end{frame}
 
-
+\stepcounter{exampleBlockCounter}
+\subsection{Représentation bilatérale}
 \begin{frame}
-\begin{exampleblock}{Exercice TFD}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Signal réel et parité des spectres}
 \begin{enumerate}\justifying
 	\item Exprimer $\overline{S(k)}$ en fonction de $S(-k)$ lorsque $s(t)$ est un
 	signal réel
@@ -166,7 +173,7 @@ l'énergie entre $-\frac{F_e}{2}$ et $\frac{F_e}{2}$.
 \begin{block}{Spectre de module bilatéral - Fonction paire}
 \begin{columns}[t]
 	\begin{column}{4cm}
-		Ce que donne la TFD
+		Ce que donne la TFR
 		\begin{figure}
 			\psset{unit=0.5cm}	
 			\begin{pspicture}[showgrid=false](0,-1)(7,3)
@@ -204,7 +211,7 @@ l'énergie entre $-\frac{F_e}{2}$ et $\frac{F_e}{2}$.
 \begin{block}{Spectre de phase bilatéral - Fonction impaire}
 \begin{columns}[t]
 	\begin{column}{4cm}
-		Ce que donne la TFD
+		Ce que donne la TFR
 		\begin{figure}
 			\psset{unit=0.5cm}	
 			\begin{pspicture}[showgrid=false](0,-2)(7,2)
@@ -242,16 +249,15 @@ l'énergie entre $-\frac{F_e}{2}$ et $\frac{F_e}{2}$.
 \end{frame}
 
 \begin{frame}
-\begin{exampleblock}{Exercices représentation spectrale bilatérale}
-Représenter les spectres bilatéraux des signaux suivants :
+\stepcounter{exampleBlockCounter}
+\begin{exampleblock}{Exercices \Roman{exampleBlockCounter} - Spectres bilatéraux avec Python}
+Représenter les spectres bilatéraux des signaux suivants avec Python:
 \begin{itemize}
   \item $s_1(t) = 3$
   \item $s_2(t) = 6sin(2\pi t)$
   \item $s_3(t) = 1 + 2cos(10\pi t) + 4cos(20\pi t + \frac{\pi}{6})$
   \item $s_4(t) = cos(100\pi t) + cos^2(100\pi t)$
 \end{itemize}
-\vspace{0.5cm}
-Refaire cet exercice en utilisant Python
 \end{exampleblock}
 \begin{alertblock}{Remarque importante}
 \justifying
@@ -259,8 +265,10 @@ La commande $fftshift$ de Python permet de recentrer le spectre. L'affichage peu
 \end{alertblock}
 \end{frame}
 
+
+\stepcounter{exampleBlockCounter}
 \begin{frame}
-\begin{exampleblock}{Exercice représentation spectrale bilatérale}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Des spectres bilatéraux à l'expression temprorelle}
 Donner l'expression temporelle du signal dont les représentations
 spectrales sont les suivantes :
 \begin{columns}[t]
@@ -302,18 +310,15 @@ spectrales sont les suivantes :
 \end{exampleblock}
 \end{frame}
 
+\subsection{Représentation monolatérale et bilatérale de la note}
+\stepcounter{exampleBlockCounter}
 \begin{frame}
-\begin{exampleblock}{Exercice TFR (FFT) sur Python}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Retour sur la note}
 \itemize\justifying
-\item Lire le documentation des fonctions \textcolor{red}{fft} et
-\textcolor{red}{ifft} de Python
 \item Charger le fichier \textit{mi2\_bute\_ros.wav}
-\item Calculer le module et la phase de la transformée de Fourier du signal
 \item Définir le vecteur fréquence associé à ce signal
-\item Lire les documentations de \textcolor{red}{fftshift} et
-\textcolor{red}{unwrap}
-\item Tracer les spectres bilatéraux de ce signal. Quelles informations en tirez-vous ? 
-\item Faire de même avec les données fournies
+\item Calculer le module et la phase de la transformée de Fourier du signal
+\item Tracer les spectres monolatéraux et bilatéraux de ce signal. Quelles informations en tirez-vous ?
 \end{exampleblock}
 \end{frame}
 
@@ -334,21 +339,23 @@ spectrales sont les suivantes :
 % \end{exampleblock}
 % \end{frame}
 
+\section{Transition vers le filtrage fréquentiel}
 \subsection{Transformée en Z}
+\stepcounter{exampleBlockCounter}
 \begin{frame}
 \begin{block}{Transformée en Z}
-En posant $z=e^{2i\pi \frac{k}{N}}$, on obtient la transformée en $Z$
+En posant $z=e^{2i\pi \frac{k}{N}}$ dans l'expression de la TFD et en ne tenant pas compte du facteur $\frac{1}{N}$, on obtient la transformée en $Z$ :
 \begin{align*}
 S(z) = \sum_{n=0}^{N-1}s(n)z^{-n}
 \end{align*}
+Cette transformée sera utilisée dans la prochaine séquence pour exprimer la fonction de transfert d'un système numérique.
 \end{block}
-\begin{exampleblock}{Exercice sur le théorème du retard}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Théorème du retard}
 	\justifying
 	Calculer les TZ des signaux suivants :
 	\itemize
 	\item $x(n-1)$
 	\item $x(n-2)$
-	\item $x(n-3)$
 	\item Généraliser
 \end{exampleblock}
 \end{frame}
