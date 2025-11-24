@@ -33,7 +33,7 @@
 
 \newcounter{exampleBlockCounter}
 \setcounter{exampleBlockCounter}{1}
-
+\def\-{\raisebox{.75pt}{-}}
 \begin{document} 
  
 \begin{frame}[plain] 
@@ -229,8 +229,8 @@ Vous procèderez par identification des différents triplets de chacun des signa
 
 \begin{frame}
 \begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Série de Fourier}
-\justifying Retrouver le résultat de l'exercice précédent par le calcul de
-$S(k)$ sur le signal suivant :
+\justifying Retrouver le résultat de l'exercice IV de la séquence précédente par le calcul de
+$S(k)$ sur le signal carré :
 \begin{figure}
 % 	\psset{xunit=1cm}
 % 	\psset{yunit=1cm}
@@ -254,7 +254,7 @@ $S(k)$ sur le signal suivant :
 		\rput(-4.5,0.25){\Large\ldots}
 		\rput(2.25,-0.25){$T_0$}
 		\rput(-.25,0.5){$1$}
-		\rput(0.25,-0.5){$-1$}
+		\rput(0.25,-0.5){$\-1$}
 	\end{pspicture}
 \end{figure}
 \end{exampleblock}
