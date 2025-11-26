@@ -131,7 +131,7 @@ $$
 \end{frame}
 
 \begin{frame}
-\begin{exampleblock}{Exercice sur l'opérateur de retard}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - L'opérateur de retard (Cf. séquence précédente)}
 	\justifying
 	Calculer les TZ des signaux suivants :
 \begin{itemize}
@@ -144,7 +144,7 @@ $$
 \end{frame}
 
 \begin{frame}
-\begin{exampleblock}{Exercice sur l'opérateur de retard}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - L'opérateur de retard - Correction}
 \begin{align*}
 TZ\{e(n-1)\} &= z^{-1}E(z)
 \end{align*}
@@ -160,8 +160,10 @@ TZ\{ e(n-m)\} &= z^{-m}E(z)
 \end{exampleblock}
 \end{frame}
 
+\stepcounter{exampleBlockCounter}
+
 \begin{frame}
-\begin{exampleblock}{Calcul de Transformée en $z$}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Calcul de Transformée en $z$}
 	\justifying
 	Calculer les TZ des équations suivantes :
 	\itemize
@@ -174,7 +176,7 @@ TZ\{ e(n-m)\} &= z^{-m}E(z)
 \end{frame}
 
 \begin{frame}
-\begin{exampleblock}{Calcul de Transformée en $z$}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Calcul de Transformée en $z$ - Correction}
 Moyenne :
 $$
 S(z)=\frac{E(z)+z^{-1}E(z)+z^{-2}E(z)+z^{-3}E(z)}{4}
@@ -188,7 +190,7 @@ $$
 \end{frame}
 
 \begin{frame}
-\begin{exampleblock}{Calcul de Transformée en $z$}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Calcul de Transformée en $z$ - Correction}
 Filtre non récursif :
 $$
 S(z)=\sum_{k=0}^{N-1}b(k)z^{-k}E(z)
@@ -201,6 +203,7 @@ $$
 \end{exampleblock}
 \end{frame}
 
+\stepcounter{exampleBlockCounter}
 
 \begin{frame}
 \justify
@@ -235,7 +238,6 @@ $$
 \begin{itemize}
   \item $H(z)$ est une fraction rationnelle en $z$
   \item On utilise son expression pour créer un filtre sous Python
-  \item Il faut la toolbox Signal Processing
   \item On ne saisit alors que les coefficients des polynômes en $z$ du
   dénominateur et du numérateur de $H(z)$
 \end{itemize}
@@ -251,7 +253,7 @@ $
 $$
 b = [1\text{, }1]\text{ et }a = [1]
 $$
-\begin{exampleblock}{Calcul de fonction de transfert $H(z)$}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Calcul de fonction de transfert $H(z)$}
 \justify Écrire les fonctions de transfert pour le filtre :
 \begin{enumerate}
   \item moyenneur
@@ -264,7 +266,7 @@ $$
 \end{frame}
 
 \begin{frame}
-\begin{exampleblock}{Calcul de fonction de transfert $H(z)$}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Calcul de fonction de transfert $H(z)$ - Correction}
 Moyenneur :
 $$
 H(z) = \frac{1}{4}+\frac{1}{4}z^{-1}+\frac{1}{4}z^{-2}+\frac{1}{4}z^{-3}
@@ -278,7 +280,7 @@ $$
 \end{frame}
 
 \begin{frame}
-\begin{exampleblock}{Calcul de fonction de transfert $H(z)$}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Calcul de fonction de transfert $H(z)$}
 Filtre non récursif :
 $$
 H(z) = \sum_{k=0}^{N-1}b(k)z^{-k}
@@ -290,6 +292,7 @@ H(z) = \frac{\sum_{k=0}^{N-1}b(k)z^{-k}}{1+\sum_{k=1}^{M-1}a(k)z^{-k}}
 $$
 \end{exampleblock}
 \end{frame}
+\stepcounter{exampleBlockCounter}
 
 \subsection{Les filtres RIF}
 \begin{frame}
@@ -306,7 +309,8 @@ $$
 \begin{block}{Propriétés}
 \begin{itemize}
   \item Ils sont toujours stables
-  \item Ils ne propage pas les erreurs de calculs numériques
+  \item Ils faut mémoriser les d'échantillons passés de l'entrée
+  \item Ils ne propagent pas les erreurs de calculs numériques
   \item Ils sont à phase linéaire (retard uniquement)
   \item Ils sont moins sélectifs que les RII pour un même ordre
 \end{itemize}
@@ -327,8 +331,9 @@ $$
 \includegraphics[scale=.15]{images/FiltreRII.eps}
 \begin{block}{Propriétés}
 \begin{itemize}
-  \item Ils ne sont pas toujours stables (choisir une méthode de synthèse)
-  \item Ils faut mémoriser plus d'échantillons passés
+  \item Ils ne sont pas toujours stables
+  \item Ils faut mémoriser les d'échantillons passés de l'entrée
+  \item Ils faut mémoriser les d'échantillons passés de la sortie
   \item Ils propagent les erreurs de calculs
   \item Ils sont à phase non linéaire (déformation du signal)
   \item Ils sont plus sélectifs que les RIF pour un même ordre
@@ -336,23 +341,24 @@ $$
 \end{block}
 \end{frame}
 
-\subsection{Exercices Python}
+\subsection{Application de filtres avec Python}
 \begin{frame}
-\begin{exampleblock}{Exercice I}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Exemples d'application de filtres}
 Soit le signal suivant $s(t)$ échantillonné à $F_e=4Hz$ :
 $$s(t) = 3 + sin(2\pi t)$$ 
 \begin{enumerate}
   \item Représenter le signal sur une durée de $10s$
-  \item Lire l'aide de la fonction Python \textbf{filter}
+  \item Lire l'aide de la fonction Python \textbf{scipy.lfilter}
   \item Programmer un filtre moyenneur sur $4$ points
   \item Programmer un filtre dérivateur
   \item Comparer la dérivée théorique avec la sortie du dérivateur. Conclusion ?
 \end{enumerate}
 \end{exampleblock}
 \end{frame}
+\stepcounter{exampleBlockCounter}
 
 \begin{frame}
-\begin{exampleblock}{Exercice II}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Filtrage de la note}
 \begin{enumerate}
   \item Charger le fichier de la note Mi
   \item Calculer le module de la TFD de ce signal
@@ -367,5 +373,5 @@ $$s(t) = 3 + sin(2\pi t)$$
 \end{enumerate}
 \end{exampleblock}
 \end{frame}
-
+\stepcounter{exampleBlockCounter}
 \end{document}
