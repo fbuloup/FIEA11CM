@@ -344,10 +344,11 @@ $$
 \subsection{Application de filtres avec Python}
 \begin{frame}
 \begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Exemples d'application de filtres}
-Soit le signal suivant $s(t)$ échantillonné à $F_e=4Hz$ :
-$$s(t) = 3 + sin(2\pi t)$$ 
+\justifying
+Soit le signal $s(t)$ ci-dessous. Ce signal sera discrétisé à la fréquence de $4Hz$ ($Fe=4Hz$).\\
+\centering $s(t) = 3 + sin(2\pi t)$
 \begin{enumerate}
-  \item Représenter le signal sur une durée de $10s$
+  \item Représenter le signal sur une durée de dix secondes
   \item Lire l'aide de la fonction Python \textbf{scipy.lfilter}
   \item Programmer un filtre moyenneur sur $4$ points
   \item Programmer un filtre dérivateur en utilisant $s(n) = \frac{e(n) - e(n-1)}{T_e}$
@@ -358,7 +359,7 @@ $$s(t) = 3 + sin(2\pi t)$$
 \stepcounter{exampleBlockCounter}
 
 \begin{frame}
-\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Filtrage de la note}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Filtrage de la note - Étape 1}
 \begin{enumerate}
   \item Charger le fichier de la note Mi
   \item Calculer le module de la TFD de ce signal
@@ -371,6 +372,13 @@ $$s(t) = 3 + sin(2\pi t)$$
   \item Proposer un filtre RIF qui soit équivalent au filtre RII précédent
   \item Conclure
 \end{enumerate}
+\end{exampleblock}
+\end{frame}
+\stepcounter{exampleBlockCounter}
+
+\begin{frame}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Filtrage de la note - Étape 2}
+\justifying L'enregistrement de cette note comporte des parasites du secteur ($50Hz$ et harmoniques) ainsi qu'un parasite à $24.2Hz$. On les entend d'ailleurs bien lorsqu'on y prête l'oreille. Essayez de les supprimer en utilisant la fonction \textbf{iirnotch(...)} de la librairie \textbf{scipy.signal}. Une deuxième méthode qui utilise le filtre en peigne (comb filter) permet également de supprimer les parasites du $50Hz$. Essayez de mettre en œuvre cette méthode de filtrage (Cf.\href{https://fr.wikipedia.org/wiki/Filtre_en_peigne}{ \textcolor{blue}{\underline{Filtre en peigne sur Wikipedia}}}).
 \end{exampleblock}
 \end{frame}
 \stepcounter{exampleBlockCounter}
