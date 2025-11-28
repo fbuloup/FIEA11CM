@@ -359,17 +359,13 @@ Soit le signal $s(t)$ ci-dessous. Ce signal sera discrétisé à la fréquence d
 \stepcounter{exampleBlockCounter}
 
 \begin{frame}
-\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Filtrage de la note - Étape 1}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Filtrage de la note - Filtres RII et RIF}
 \begin{enumerate}
-  \item Charger le fichier de la note Mi
-  \item Calculer le module de la TFD de ce signal
-  \item Tracer le spectre monolatéral. Quelles informations en tirez-vous ?
-  \item Ajouter un bruit blanc (voir avec le prof.)
-  \item Filtrer avec un filtre de type RII. Utiliser la fonction \textbf{butter}
-  \item Proposer un ordre et une fréquence de coupure permettant de supprimer au
-  mieux le bruit sans détruire l'information
-  \item Filtrer avec un filtre de type RIF. Utiliser la fonction \textbf{firpm}
-  \item Proposer un filtre RIF qui soit équivalent au filtre RII précédent
+  \item Charger et écoutez le signal de la note
+  \item Tracer le spectre monolatéral de ce signal. Quelles informations en tirez-vous ?
+  \item Ajouter un bruit blanc et écoutez de nouveau la note bruitée.
+  \item Filtrer avec un filtre de type RII en utilisant la fonction \textbf{butter} (Proposer un ordre et une fréquence de coupure permettant de supprimer au mieux le bruit sans détruire l'information)
+  \item Filtrer avec un filtre de type RIF en utilisant la fonction \textbf{remez}
   \item Conclure
 \end{enumerate}
 \end{exampleblock}
@@ -377,7 +373,7 @@ Soit le signal $s(t)$ ci-dessous. Ce signal sera discrétisé à la fréquence d
 \stepcounter{exampleBlockCounter}
 
 \begin{frame}
-\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Filtrage de la note - Étape 2}
+\begin{exampleblock}{Exercice \Roman{exampleBlockCounter} - Filtrage de la note - Filtres réjecteur et en peigne}
 \justifying L'enregistrement de cette note comporte des parasites du secteur ($50Hz$ et harmoniques) ainsi qu'un parasite à $24.2Hz$. On les entend d'ailleurs bien lorsqu'on y prête l'oreille. Essayez de les supprimer en utilisant la fonction \textbf{iirnotch(...)} de la librairie \textbf{scipy.signal}. Une deuxième méthode qui utilise le filtre en peigne (comb filter) permet également de supprimer les parasites du $50Hz$. Essayez de mettre en œuvre cette méthode de filtrage (Cf.\href{https://fr.wikipedia.org/wiki/Filtre_en_peigne}{ \textcolor{blue}{\underline{Filtre en peigne sur Wikipedia}}}).
 \end{exampleblock}
 \end{frame}
